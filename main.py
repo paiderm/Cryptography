@@ -5,11 +5,11 @@ def main():
     print("Welcome to the Crypography Toolbox")
     print("Enter a Method to use: ")
 
-    print("\tVigenere Cipher")
+    print("\t1) Vigenere Cipher")
 
     userMethodChoice = input()
-
-    if userMethodChoice.lower().replace(' ', '') == 'vigenerecipher':
+    userMethodChoice = userMethodChoice.lower().replace(' ', '')
+    if userMethodChoice == 'vigenerecipher' or userMethodChoice == '1':
         vigenereCipher = VigenereCipher()
         vigenereCipher.getChoice()
 

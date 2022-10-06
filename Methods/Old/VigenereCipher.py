@@ -1,5 +1,6 @@
+from email import message
 from Methods.Cipher import Cipher
-
+from Math import Algebra
 
 class VigenereCipher(Cipher):
     def __init__(self):
@@ -7,7 +8,7 @@ class VigenereCipher(Cipher):
 
         super().__init__()
 
-        self.encrypt() if self.choice == 'E' else self.decrypt()
+        self.encrypt() if self.choice.upper() == 'E' else self.decrypt()
 
     def description(self):
         what = ''
@@ -29,16 +30,29 @@ class VigenereCipher(Cipher):
 
         self.displayLayout(self.inputMessage, self.key)
 
+        messageToNumbersArray = []
+        
+        for i in range(len(self.inputMessage)):
+            messageToNumbersArray.append(Algebra.convertBetweenLetterAndNumber(self.inputMessage[i], self.alphabet))
+
+        keyToNumbersArray = []
+        for i in range(len(self.key)):
+            keyToNumbersArray.append(Algebra.convertBetweenLetterAndNumber(self.key[i], self.alphabet))
+
+        self.displayLayout(messageToNumbersArray, keyToNumbersArray)
+
     def decrypt(self):
         pass
 
     def displayLayout(self, message, key):
         print()
-        print("  " + str(message))
+        print("  ", end='')
+        for i in range(len(message)):
+            print(message[i], end='  ')
 
-        print("+ ", end='')
+        print("\n+ ", end='')
 
         for i in range(len(message)):
-            print(key[i % len(key)], end='')
+            print(key[i % len(key)], end='  ')
 
         print()
