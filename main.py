@@ -1,4 +1,3 @@
-from manim import *
 from Methods.Old.VigenereCipher import VigenereCipher
 
 

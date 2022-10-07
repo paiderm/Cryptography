@@ -18,43 +18,26 @@ class VigenereCipher(Cipher):
 
 
     def encrypt(self):
-        self.inputMessage = input("Enter the Message to Encrypt: ")
-        while not self.isValidMessage(self.inputMessage):
-            print("Invalid Message")
-            self.inputMessage = input("Enter the Message to Encrypt: ")
+        self.inputMessage = self.inputManger.getMessage(self.choice, self.alphabet)
 
-        self.key = input("Enter the Key to Encrypt the Message: ")
-        while not self.isValidMessage(self.key):
-            print("Invalid Key")
-            self.key = input("Enter the Key to Encrypt the Message: ")
+        self.key = self.inputManger.getKey(self.choice, self.alphabet)
 
         # display the words + words
+        self.outputManager.printIdea("We can \"add\" the letters of the message and the key together to get the encrypted message")
+        self.outputManager.printAddingTwoLines_Vigenere(self.inputMessage, self.key)
 
         # convert this group to the isometric group Z/n where n is the amount of characters in the alphabet
-        message_to_numbers_array = []
+        self.outputManager.printStepBeingTaken("Convert the message and key to the isometric group Z/n where n is the amount of characters in the alphabet")
+        message_to_numbers_array = self.convertStringToNumbersModulo(self.inputMessage, self.alphabet)
+        keyToNumbersArray = self.convertStringToNumbersModulo(self.key, self.alphabet)
+
+        self.outputManager.displayConversion(self.inputMessage, message_to_numbers_array)
+        self.outputManager.displayConversion(self.key, keyToNumbersArray)
         
-        for i in range(len(self.inputMessage)):
-            message_to_numbers_array.append(Algebra.convertBetweenLetterAndNumber(self.inputMessage[i], self.alphabet))
+        self.outputManager.printAddingTwoLines_Vigenere(message_to_numbers_array, keyToNumbersArray)
 
-
-        keyToNumbersArray = []
-        for i in range(len(self.key)):
-            keyToNumbersArray.append(Algebra.convertBetweenLetterAndNumber(self.key[i], self.alphabet))
-
-        self.displayLayout(message_to_numbers_array, keyToNumbersArray)
 
     def decrypt(self):
         pass
 
-    def displayLayout(self, message, key):
-        print()
-        print("  ", end='')
-        for i in range(len(message)):
-            print(message[i], end='  ')
-
-        print("\n+ ", end='')
-
-        for i in range(len(message)):
-            print(key[i % len(key)], end='  ')
-
-        print()
+    
