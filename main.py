@@ -1,3 +1,4 @@
+from manim import *
 from Methods.Old.VigenereCipher import VigenereCipher
 
 
@@ -12,7 +13,6 @@ def main():
     if userMethodChoice == 'vigenerecipher' or userMethodChoice == '1':
         vigenereCipher = VigenereCipher()
         vigenereCipher.getChoice()
-
 
 if __name__ == "__main__":
     main()

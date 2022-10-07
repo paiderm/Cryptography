@@ -28,18 +28,20 @@ class VigenereCipher(Cipher):
             print("Invalid Key")
             self.key = input("Enter the Key to Encrypt the Message: ")
 
-        self.displayLayout(self.inputMessage, self.key)
+        # display the words + words
 
-        messageToNumbersArray = []
+        # convert this group to the isometric group Z/n where n is the amount of characters in the alphabet
+        message_to_numbers_array = []
         
         for i in range(len(self.inputMessage)):
-            messageToNumbersArray.append(Algebra.convertBetweenLetterAndNumber(self.inputMessage[i], self.alphabet))
+            message_to_numbers_array.append(Algebra.convertBetweenLetterAndNumber(self.inputMessage[i], self.alphabet))
+
 
         keyToNumbersArray = []
         for i in range(len(self.key)):
             keyToNumbersArray.append(Algebra.convertBetweenLetterAndNumber(self.key[i], self.alphabet))
 
-        self.displayLayout(messageToNumbersArray, keyToNumbersArray)
+        self.displayLayout(message_to_numbers_array, keyToNumbersArray)
 
     def decrypt(self):
         pass
