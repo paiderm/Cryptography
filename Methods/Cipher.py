@@ -1,3 +1,6 @@
+from Utils.InputManager import InputManager
+from Utils.OutputManager import OutputManager
+from Math import Algebra
 class Cipher:
     def __init__(self):
         self.inputMessage = ''
@@ -5,6 +8,8 @@ class Cipher:
         self.key = ''
         self.choice = ''
         self.alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijkmlnopqrstuvwxyz'
+        self.inputManger = InputManager()
+        self.outputManager = OutputManager()
 
         self.getChoice()
 
@@ -12,8 +17,9 @@ class Cipher:
         print("Enter E to Encrypt or D to Decrypt")
         self.choice = input().upper()
 
-    def isValidMessage(self, message):
-        for i in message:
-            if self.alphabet.find(i) < 0:
-                return False
-        return True
+    def convertStringToNumbersModulo(self, string, alphabet):
+        numbers = []
+        for i in range(len(string)):
+            numbers.append(Algebra.convertBetweenLetterAndNumber(string[i], alphabet))
+
+        return numbers
